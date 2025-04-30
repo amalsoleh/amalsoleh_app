@@ -1,0 +1,12 @@
+{
+  "title": "Chapter 1.2",
+  "cover_portrait": "cover_portrait.png",
+  "cover_landscape": "cover_landscape.png",
+  "pdf_portrait": "ebook_portrait.pdf",
+  "pdf_landscape": "ebook_landscape.pdf",
+  "audio": {
+    "male": "Audio/male/",
+    "female": "Audio/female/"
+  },
+  "pages": 13
+} 

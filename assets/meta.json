@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1.nabi_adam/1.1",
+    "title": "Nabi Adam AS – Manusia Pertama yang Diciptakan Allah",
+    "cover_portrait": "cover_portrait.png",
+    "cover_landscape": "cover_landscape.png",
+    "pdf_portrait": "ebook_portrait.pdf",
+    "pdf_landscape": "ebook_landscape.pdf",
+    "audio": {
+      "male": "audio/male/01_Pembukaan.mp3",
+      "female": "audio/female/01_Pembukaan.mp3"
+    },
+    "pages": 13
+  },
+  {
+    "id": "1.nabi_adam/1.2",
+    "title": "Habil Dan Qabil – Tragedi Anak Nabi Adam",
+    "cover_portrait": "cover_portrait.png",
+    "cover_landscape": "cover_landscape.png",
+    "pdf_portrait": "ebook_portrait.pdf",
+    "pdf_landscape": "ebook_landscape.pdf",
+    "audio": {
+      "male": "audio/male/01_Pembukaan.mp3",
+      "female": "audio/female/01_Pembukaan.mp3"
+    },
+    "pages": 13
+  },
+  {
+    "id": "3.nabi_nuh/3",
+    "title": "Nabi Nuh AS – Bahtera Penyelamat",
+    "cover_portrait": "cover_portrait.png",
+    "cover_landscape": "cover_landscape.png",
+    "pdf_portrait": "ebook_portrait.pdf",
+    "pdf_landscape": "ebook_landscape.pdf",
+    "audio": {
+      "male": "audio/male/01_Pembukaan.mp3",
+      "female": "audio/female/01_Pembukaan.mp3"
+    },
+    "pages": 13
+  }
+]

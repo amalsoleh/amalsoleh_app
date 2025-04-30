@@ -1,0 +1,39 @@
+name: amalsoleh_app
+description: "Amal Soleh - Islamic Stories for All"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.7.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  json_annotation: ^4.8.1
+  just_audio: ^0.9.36
+  pdfx: 2.6.0
+  path: ^1.8.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    # core assets
+    - assets/splash_bg.png
+    - assets/logo_ui.png
+    - assets/meta.json
+
+    # Chapter 1 (Nabi Adam AS)
+    - assets/books/1.nabi_adam/1.1/
+    - assets/books/1.nabi_adam/1.2/
+
+    # Chapter 2 (Nabi Nuh AS)
+    - assets/books/3.nabi_nuh/3/
