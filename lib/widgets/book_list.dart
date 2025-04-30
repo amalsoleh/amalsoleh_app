@@ -21,47 +21,59 @@ class BookList extends StatelessWidget {
         // Section header
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-          child: Text(title, style: Theme.of(context).textTheme.titleLarge),
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
 
         // Carousel
         SizedBox(
-          height: 200, // total height of each card
-          child: ListView.builder(
+          height: 310,
+          child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             itemCount: chapters.length,
-            itemBuilder: (ctx, i) {
-              final chap = chapters[i];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: SizedBox(
-                  width: 140, // card width
-                  height: 200, // must match outer SizedBox height
-                  child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      children: [
-                        // 1) Cover image fills all space above title
-                        Expanded(
+            separatorBuilder: (_, __) => const SizedBox(width: 16),
+            itemBuilder: (ctx, index) {
+              final chap = chapters[index];
+              return SizedBox(
+                width: 160,
+                child: Card(
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      // 1) Cover image with exact 1024:1792 aspect ratio
+                      Expanded(
+                        child: AspectRatio(
+                          aspectRatio: 1024 / 1792,
                           child: Image.asset(
                             chap.getCover(portrait: true),
                             fit: BoxFit.cover,
-                            width: double.infinity,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey[300],
+                                child: const Center(
+                                  child: Icon(Icons.image_not_supported),
+                                ),
+                              );
+                            },
                           ),
                         ),
+                      ),
 
-                        // 2) Title bar with fixed height
-                        Container(
-                          height: 48,
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                      // 2) Title bar
+                      Container(
+                        height: 40,
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Center(
                           child: Text(
                             chap.title,
                             maxLines: 2,
+                            textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontWeight: FontWeight.w500,
@@ -69,8 +81,8 @@ class BookList extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );

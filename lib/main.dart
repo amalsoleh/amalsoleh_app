@@ -1,7 +1,7 @@
 // lib/main.dart
 
 import 'package:flutter/material.dart';
-import 'widgets/home_screen.dart';
+import 'screens/home_screen.dart';
 import 'screens/book_list_screen.dart';
 
 void main() => runApp(const MyApp());

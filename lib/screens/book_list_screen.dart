@@ -1,53 +1,79 @@
 import 'package:flutter/material.dart';
-import '../models/book_metadata.dart';
 import '../services/book_service.dart';
-import '../widgets/book_list.dart';  // ← make sure this is here
+import '../widgets/book_list.dart';
+import '../models/book_metadata.dart';
 
-/// The “home” screen that actually fetches your JSON and displays two BookList rows.
+const _gold = Color(0xFFFFD400);
+
 class BookListScreen extends StatefulWidget {
-  const BookListScreen({super.key});
-
+  const BookListScreen({Key? key}) : super(key: key);
   @override
   State<BookListScreen> createState() => _BookListScreenState();
 }
 
 class _BookListScreenState extends State<BookListScreen> {
-  late final Future<List<ChapterMetadata>> _chaptersFuture;
+  late final Future<List<ChapterMetadata>> _chapFuture;
 
   @override
   void initState() {
     super.initState();
-    _chaptersFuture = BookService().loadChapters();
+    _chapFuture = BookService().loadChapters();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: Image.asset('assets/logo_ui.png', height: 36),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Container(
+          decoration: BoxDecoration(
+            image: const DecorationImage(
+              image: AssetImage('assets/splash_bg.png'),
+              fit: BoxFit.cover,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            centerTitle: true,
+            iconTheme: const IconThemeData(color: _gold),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 2.0),
+              child: Image.asset('assets/logo_ui.png', height: 50),
+            ),
+          ),
+        ),
       ),
       body: FutureBuilder<List<ChapterMetadata>>(
-        future: _chaptersFuture,
+        future: _chapFuture,
         builder: (ctx, snap) {
           if (snap.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (snap.hasError || (snap.data?.isEmpty ?? true)) {
-            return const Center(child: Text('No books found.'));
-          }
-
           final chapters = snap.data!;
-
+          if (chapters.isEmpty) {
+            return const Center(
+              child: Text(
+                'No books found.',
+                style: TextStyle(color: Colors.black87),
+              ),
+            );
+          }
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 16),
                 BookList(title: 'New Arrivals', chapters: chapters),
-                BookList(title: 'Most Read',     chapters: chapters),
+                BookList(title: 'Most Read', chapters: chapters),
                 const SizedBox(height: 32),
               ],
             ),
